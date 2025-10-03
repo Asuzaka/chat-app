@@ -1,0 +1,15 @@
+# Binaries
+*.exe
+*.out
+*.dll
+*.so
+*.dylib
+
+# Build & cache
+bin/
+*.test
+*.log
+
+# IDE
+.vscode/
+.idea/

@@ -1,0 +1,13 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# React Native
+android/app/build/
+ios/Pods/
+
+# IDE
+.vscode/
+.idea/
