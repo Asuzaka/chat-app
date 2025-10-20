@@ -1,8 +1,10 @@
 {
-  "devDependencies": {
-    "standard-version": "^9.5.0"
-  },
+  "name": "chat-app",
+  "version": "0.1.1",
   "scripts": {
     "release": "standard-version"
+  },
+  "devDependencies": {
+    "standard-version": "^9.5.0"
   }
 }
