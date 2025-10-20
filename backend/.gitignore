@@ -13,3 +13,6 @@ bin/
 # IDE
 .vscode/
 .idea/
+
+# Ignore environment variables file
+.env

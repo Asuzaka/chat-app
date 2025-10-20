@@ -1,0 +1,11 @@
+app:
+  name: ChatApp
+  version: 1.0.0
+  timezone: UTC
+server:
+  read_timout: 5s
+  write_timeout: 5s
+database:
+  max_open_conns: 25
+  max_idle_conns: 5
+  conn_max_lifetime: 5m
