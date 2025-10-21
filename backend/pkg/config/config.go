@@ -2,10 +2,10 @@ package config
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"time"
 
+	"github.com/Asuzaka/chat-app/backend/pkg/logger"
 	"github.com/joho/godotenv"
 	"gopkg.in/yaml.v3"
 )
@@ -51,11 +51,11 @@ func Load() *Config {
 	yamlFile, err := os.ReadFile("config/config.yaml")
 
 	if err != nil {
-		log.Fatalf("Failed to read config.yaml: %v", err)
+		logger.Error(fmt.Sprintf("Failed to read config.yaml: %v", err))
 	}
 
 	if err = yaml.Unmarshal(yamlFile, cfg); err != nil {
-		log.Fatalf("Failed to parse config.yaml: %v", err)
+		logger.Error(fmt.Sprintf("Failed to parse config.yaml: %v", err))
 	}
 
 	// Insert values to config
