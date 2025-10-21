@@ -2,18 +2,24 @@ package main
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/Asuzaka/chat-app/backend/pkg/config"
+	"github.com/Asuzaka/chat-app/backend/pkg/logger"
 )
 
 func main() {
+	// Temporar logger
+	logger.Init(true)
+	logger.Info("Temporar logger initialized")
+
 	cfg := config.Load()
 
-	fmt.Println("Loaded configuration:")
-	fmt.Printf("App: %s v%s\n", cfg.App.Name, cfg.App.Version)
-	fmt.Printf("Server: %s:%s (%s)\n", "localhost", cfg.Server.Port, cfg.Server.Environment)
-	fmt.Printf("DB URL: %s\n", cfg.DatabaseURL())
+	logger.Init(cfg.Server.Environment == "development")
 
-	log.Println("Backend is running...")
+	logger.Info("Loaded configuration:")
+	logger.Info(fmt.Sprintf("App: %s v%s\n", cfg.App.Name, cfg.App.Version))
+	logger.Info(fmt.Sprintf("Server: %s:%s (%s)\n", "localhost", cfg.Server.Port, cfg.Server.Environment))
+	logger.Info(fmt.Sprintf("DB URL: %s\n", cfg.DatabaseURL()))
+
+	logger.Info("Backend is running...")
 }
