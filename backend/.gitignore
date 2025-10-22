@@ -16,3 +16,6 @@ bin/
 
 # Ignore environment variables file
 .env
+
+# Database volume
+data/

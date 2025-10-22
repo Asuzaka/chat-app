@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    container_name: chatapp-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: chatapp
+    ports:
+      - "5432:5432"
+    volumes:  
+      - ./data:/var/lib/postgresql/data
