@@ -3,9 +3,11 @@ package main
 import (
 	"fmt"
 
+	"github.com/Asuzaka/chat-app/backend/internal/routes"
 	"github.com/Asuzaka/chat-app/backend/pkg/config"
 	"github.com/Asuzaka/chat-app/backend/pkg/db"
 	"github.com/Asuzaka/chat-app/backend/pkg/logger"
+	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
@@ -28,6 +30,14 @@ func main() {
 	}
 
 	defer db.Close()
+
+	app := fiber.New()
+	// REST + WS
+	routes.Register(app)
+
+	if err := app.Listen(":" + cfg.Server.Port); err != nil {
+		logger.Error(fmt.Sprint(err))
+	}
 
 	logger.Info("Backend is running...")
 }
