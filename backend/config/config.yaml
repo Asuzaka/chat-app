@@ -9,3 +9,7 @@ database:
   max_open_conns: 25
   max_idle_conns: 5
   conn_max_lifetime: 5m
+jwt: 
+  acess_ttl: 30m
+  refresh_ttl: 168h
+  issuer: ChatAppIssuer

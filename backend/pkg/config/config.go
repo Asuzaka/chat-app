@@ -37,7 +37,11 @@ type Config struct {
 	} `yaml:"database"`
 
 	JWT struct {
-		Secret string //.env
+		AccessSecret  string        //.env
+		RefreshSecret string        //.env
+		AccessTTL     time.Duration `yaml:"access_ttl"`
+		RefreshTTL    time.Duration `yaml:"refresh_ttl"`
+		Issuer        string        `yaml:"issuer"`
 	}
 }
 
@@ -69,7 +73,8 @@ func Load() *Config {
 	cfg.Database.Name = getEnv("DB_NAME", "chatapp")
 	cfg.Database.SSLMode = getEnv("DB_SSLMODE", "disable")
 
-	cfg.JWT.Secret = getEnv("JWT_SECRET", "unknownsecret")
+	cfg.JWT.AccessSecret = getEnv("JWT_ACCESS_SECRET", "unknownsecret")
+	cfg.JWT.RefreshSecret = getEnv("JWT_REFRESH_SECRET", "unknownsecret")
 	return cfg
 }
 
@@ -85,9 +90,19 @@ func (c *Config) DatabaseURL() string {
 	)
 }
 
-func getEnv(key, fallback string) string {
+func getEnv(key, fallback string, crit ...bool) string {
 	if val, ok := os.LookupEnv(key); ok {
 		return val
 	}
+
+	isCritical := false
+	if len(crit) > 0 {
+		isCritical = crit[0]
+	}
+
+	if isCritical {
+		logger.Error(fmt.Sprintf("missing required env: %s", key))
+	}
+
 	return fallback
 }
